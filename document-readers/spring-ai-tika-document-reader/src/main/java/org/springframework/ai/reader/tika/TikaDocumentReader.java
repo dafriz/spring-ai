@@ -17,10 +17,10 @@
 package org.springframework.ai.reader.tika;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
 /**
  * A document reader that leverages Apache Tika to extract text from a variety of document
  * formats, such as PDF, DOC/DOCX, PPT/PPTX, and HTML. For a comprehensive list of
- * supported formats, refer to: https://tika.apache.org/3.1.0/formats.html.
+ * supported formats, refer to: https://tika.apache.org/3.3.2/formats.html.
  *
  * This reader directly provides the extracted text without any additional formatting. All
  * extracted texts are encapsulated within a {@link Document} instance.
@@ -143,7 +143,7 @@ public class TikaDocumentReader implements DocumentReader {
 	 */
 	@Override
 	public List<Document> get() {
-		try (InputStream stream = this.resource.getInputStream()) {
+		try (TikaInputStream stream = TikaInputStream.get(this.resource.getInputStream())) {
 			this.parser.parse(stream, this.handler, this.metadata, this.context);
 			return List.of(toDocument(this.handler.toString()));
 		}

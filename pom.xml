@@ -281,8 +281,8 @@
 
 		<!-- Document processing -->
 		<commonmark.version>0.22.0</commonmark.version>
-		<jsoup.version>1.22.2</jsoup.version>
-		<pdfbox.version>3.0.7</pdfbox.version>
+		<jsoup.version>1.23.1</jsoup.version>
+		<pdfbox.version>3.0.8</pdfbox.version>
 
 		<!-- Utilities -->
 		<jsonschema.version>5.0.0</jsonschema.version>
